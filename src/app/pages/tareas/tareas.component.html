@@ -1,0 +1,29 @@
+<h2>Mis Tareas</h2>
+
+<!-- Formulario para nueva tarea -->
+<form (ngSubmit)="agregarTarea()">
+  <label>
+    Nombre de la tarea:
+    <input [(ngModel)]="nuevaTarea.nombre" name="nombre" required />
+  </label>
+  <br />
+  <label>
+    Fecha límite:
+    <input type="datetime-local" [(ngModel)]="nuevaTarea.fechaLimite" name="fechaLimite" required />
+  </label>
+  <br />
+  <button type="submit">Agregar tarea</button>
+</form>
+
+<hr />
+
+<!-- Lista de tareas -->
+<ul>
+  <li *ngFor="let tarea of tareas; let i = index">
+    <strong>{{ tarea.nombre }}</strong>  
+    <span> | Límite: {{ tarea.fechaLimite | date:'short' }} </span>
+    <button (click)="marcarComoCumplida(i)" [disabled]="tarea.cumplida">
+      {{ tarea.cumplida ? 'Cumplida ✅' : 'Marcar como cumplida' }}
+    </button>
+  </li>
+</ul>
